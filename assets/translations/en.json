@@ -1,0 +1,29 @@
+{
+  "appName": "SKINDER",
+  "welcome": {
+    "header": "Welcome to",
+    "body": "Connecting you with the best ski and snowboard instructors. Made in Israel, for Israelis! 🇮🇱"
+  },
+  "sign-in": {
+    "header": "Sign in to",
+    "email": "Email",
+    "email-placeholder": "Enter your email",
+    "password": "Password",
+    "password-placeholder": "Enter your password",
+    "sign-in-button": "Sign in",
+    "no-account": "Don't have an account?",
+    "sign-up-button": "Sign up"
+  },
+  "sign-up": {
+    "header": "Sign up to",
+    "email": "Email",
+    "email-placeholder": "Enter your email",
+    "password": "Password",
+    "password-placeholder": "Enter your password",
+    "username": "Username",
+    "username-placeholder": "Enter your username",
+    "already-have-account": "Already have an account?",
+    "sign-in-button": "Sign in",
+    "submit": "Sign up"
+  }
+}
