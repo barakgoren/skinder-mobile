@@ -2,19 +2,21 @@ import { StatusBar } from "expo-status-bar";
 import {
   I18nManager,
   Image,
+  Modal,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
-import { Slot, SplashScreen, Stack } from "expo-router";
+import { Link, Slot, SplashScreen, Stack } from "expo-router";
 import { useFonts } from "expo-font";
 import "../global.css";
 import { useEffect } from "react";
 import AppName from "../components/AppName";
 import { Redirect, Tabs } from "expo-router";
 import { icons } from "../constants";
-import Icons from "react-native-vector-icons/Feather";
+import Icons from "react-native-vector-icons/Ionicons";
+import ModalContainer from "../components/Modal";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -80,7 +82,7 @@ export default function App() {
         }}
       >
         <Tabs.Screen
-          name="home"
+          name="(home)"
           options={{
             title: "Home",
             headerShown: true,
@@ -90,6 +92,17 @@ export default function App() {
             headerTintColor: "#fff", // Customize the text color
             headerTitle: () => {
               return <AppName className="font-pbold text-2xl" />;
+            },
+            headerRight: () => {
+              return (
+                <View className="w-10 mb-3">
+                  <Link href="profile/index">
+                    <TouchableOpacity onPress={() => {}} activeOpacity={0.7}>
+                      <Icons name="person" size={24} color="#6ae4e1" />
+                    </TouchableOpacity>
+                  </Link>
+                </View>
+              );
             },
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
@@ -102,38 +115,7 @@ export default function App() {
           }}
         />
         <Tabs.Screen
-          name="bookmark"
-          options={{
-            title: "Bookmark",
-            headerShown: false,
-            tabBarIcon: ({ color, focused }) => (
-              <TabIcon
-                icon={icons.bookmark}
-                color={color}
-                name="Bookmark"
-                focused={focused}
-              />
-            ),
-          }}
-        />
-
-        <Tabs.Screen
-          name="create"
-          options={{
-            title: "Create",
-            headerShown: false,
-            tabBarIcon: ({ color, focused }) => (
-              <TabIcon
-                icon={icons.plus}
-                color={color}
-                name="Create"
-                focused={focused}
-              />
-            ),
-          }}
-        />
-        <Tabs.Screen
-          name="profile"
+          name="(profile)"
           options={{
             title: "Profile",
             headerShown: false,
@@ -163,6 +145,7 @@ export default function App() {
         />
       </Tabs>
       <StatusBar backgroundColor="#161622" style="light" />
+      <ModalContainer />
     </>
   );
 }

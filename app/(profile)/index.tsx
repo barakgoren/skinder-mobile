@@ -4,11 +4,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Icons from "react-native-vector-icons/Feather";
 import Fa5 from "react-native-vector-icons/FontAwesome5";
 import Fa from "react-native-vector-icons/FontAwesome";
-import { images } from "../constants";
-import CustomButton from "../components/CustomButton";
+import { images } from "../../constants";
+import CustomButton from "../../components/CustomButton";
 import CountryFlag from "react-native-country-flag";
 import { FlatList } from "react-native";
-import Review from "../components/Review";
+import Review from "../../components/Review";
 
 const Profile = () => {
   const placeholderImage = "https://via.placeholder.com/150";

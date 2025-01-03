@@ -11,7 +11,7 @@ import Animated, {
 } from "react-native-reanimated";
 import type { ICarouselInstance } from "react-native-reanimated-carousel";
 import Carousel from "react-native-reanimated-carousel";
-import { data } from "../data";
+import { data } from "../../data";
 
 const PAGE_WIDTH = Dimensions.get("window").width - 280;
 const PAGE_HEIGHT = 150;
