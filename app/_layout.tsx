@@ -17,6 +17,10 @@ import { Redirect, Tabs } from "expo-router";
 import { icons } from "../constants";
 import Icons from "react-native-vector-icons/Ionicons";
 import ModalContainer from "../components/Modal";
+import { usePopupStore } from "../@core/store/popup.store";
+import Entypo from "react-native-vector-icons/Entypo";
+import Fa from "react-native-vector-icons/FontAwesome";
+import Ion from "react-native-vector-icons/Ionicons";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -30,12 +34,7 @@ type TabIconProps = {
 const TabIcon = ({ icon, color, name, focused }: TabIconProps) => {
   return (
     <View className="flex items-center justify-center gap-2 w-20">
-      <Image
-        source={icon}
-        resizeMode="contain"
-        tintColor={color}
-        className="w-6 h-6"
-      />
+      {icon}
       <Text
         className={`${focused ? "font-psemibold" : "font-pregular"} text-xs`}
         style={{ color: color }}
@@ -58,6 +57,7 @@ export default function App() {
     "Poppins-SemiBold": require("../assets/fonts/Poppins-SemiBold.ttf"),
     "Poppins-Thin": require("../assets/fonts/Poppins-Thin.ttf"),
   });
+  const toggle = usePopupStore((state) => state.toggle);
 
   useEffect(() => {
     if (error) console.error(error);
@@ -97,7 +97,7 @@ export default function App() {
               return (
                 <View className="w-10 mb-3">
                   <Link href="profile/index">
-                    <TouchableOpacity onPress={() => {}} activeOpacity={0.7}>
+                    <TouchableOpacity onPress={toggle} activeOpacity={0.7}>
                       <Icons name="person" size={24} color="#6ae4e1" />
                     </TouchableOpacity>
                   </Link>
@@ -106,7 +106,13 @@ export default function App() {
             },
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
-                icon={icons.home}
+                icon={
+                  focused ? (
+                    <Ion name="home" size={24} color={color} />
+                  ) : (
+                    <Ion name="home-outline" size={24} color={color} />
+                  )
+                }
                 color={color}
                 name="Home"
                 focused={focused}
@@ -115,9 +121,25 @@ export default function App() {
           }}
         />
         <Tabs.Screen
-          name="(profile)"
+          name="(search)"
           options={{
-            title: "Profile",
+            title: "Search",
+            headerShown: false,
+            tabBarIcon: ({ color, focused }) => (
+              <TabIcon
+                icon={ focused ? <Ion name="search" size={26} color={color} /> : <Ion name="search-outline" size={26} color={color} />}
+                color={color}
+                name="Search"
+                focused={focused}
+              />
+            ),
+          }}
+        />
+
+        <Tabs.Screen
+          name="(map)"
+          options={{
+            title: "Map",
             headerShown: false,
             headerStyle: {
               backgroundColor: "#141f2a", // Customize the background color
@@ -135,7 +157,28 @@ export default function App() {
             },
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
-                icon={icons.profile}
+                icon={
+                  focused ? (
+                    <Fa name="map" size={24} color={color} />
+                  ) : (
+                    <Fa name="map-o" size={24} color={color} />
+                  )
+                }
+                color={color}
+                name="Map"
+                focused={focused}
+              />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="(profile)"
+          options={{
+            title: "Profile",
+            headerShown: false,
+            tabBarIcon: ({ color, focused }) => (
+              <TabIcon
+                icon={focused ? <Icons name="person" size={24} color={color} /> : <Icons name="person-outline" size={24} color={color} />}
                 color={color}
                 name="Profile"
                 focused={focused}

@@ -1,48 +1,29 @@
 import React, { useEffect } from "react";
-import { View, Text, Modal, StyleSheet, Button } from "react-native";
-import {
-  NavigationContainer,
-  NavigationIndependentTree,
-  useNavigation,
-} from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { enableScreens } from "react-native-screens";
-import ScreenOne from "./ScreenOne";
-import ScreenTwo from "./ScreenTwo";
-
-enableScreens();
-const Stack = createNativeStackNavigator();
+import { View, Modal } from "react-native";
+import Icons from "react-native-vector-icons/AntDesign";
+import LoginPage from "./LoginPage";
+import { usePopupStore } from "../@core/store/popup.store";
 
 export default function ModalContainer() {
-  useEffect(() => {}, []);
+  const isOpen = usePopupStore((state) => state.isOpen);
+  const close = usePopupStore((state) => state.close);
   return (
-    <Modal
-      transparent={false}
-      visible={true}
-      animationType="slide"
-      presentationStyle="pageSheet"
-    >
-      <View className=" flex items-center justify-center">
-        <View className="w-full h-full">
-          {/* <ScreenOne /> */}
-          <NavigationIndependentTree>
-            <NavigationContainer initialState={{ index: 0, routes: [] }}>
-              <Stack.Navigator initialRouteName="ScreenOne">
-                <Stack.Screen
-                  name="ScreenOne"
-                  component={ScreenOne}
-                  options={{ title: "Screen One", headerShown: false }}
-                />
-                <Stack.Screen
-                  name="ScreenTwo"
-                  component={ScreenTwo}
-                  options={{ title: "Screen Two" }}
-                />
-              </Stack.Navigator>
-            </NavigationContainer>
-          </NavigationIndependentTree>
+    <>
+      <Modal
+        transparent={false}
+        visible={isOpen}
+        animationType="slide"
+        presentationStyle="pageSheet"
+        onRequestClose={close}
+        
+      >
+        <View className="bg-primary-100 h-full p-4">
+          <View className="header">
+            <Icons name="close" size={24} onPress={close} />
+          </View>
+          <LoginPage />
         </View>
-      </View>
-    </Modal>
+      </Modal>
+    </>
   );
 }

@@ -1,33 +1,45 @@
-import { View, Text, Image, ScrollView } from "react-native";
+import { View, Text, Image, ScrollView, TouchableOpacity } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Icons from "react-native-vector-icons/Feather";
 import Fa5 from "react-native-vector-icons/FontAwesome5";
 import Fa from "react-native-vector-icons/FontAwesome";
+import Feather from "react-native-vector-icons/Feather";
 import { images } from "../../constants";
 import CustomButton from "../../components/CustomButton";
 import CountryFlag from "react-native-country-flag";
 import { FlatList } from "react-native";
 import Review from "../../components/Review";
+import { useNavigation, useRouter } from "expo-router";
 
 const Profile = () => {
-  const placeholderImage = "https://via.placeholder.com/150";
+  const router = useRouter();
 
   return (
     <ScrollView className="h-full bg-primary">
       <View>
         <Image
-          source={{ uri: placeholderImage }}
-          className="w-full h-52"
+          source={images.kapronCover}
+          className="w-full h-52 bg-slate-500"
           resizeMode="cover"
         />
         <View className="px-5">
-          <View className="w-36 h-36 ms-auto bg-primary flex items-center justify-center -mt-[4.5rem] rounded-full relative">
-            <Image
-              source={images.profile}
-              className="w-32 h-32 rounded-full"
-              resizeMode="cover"
-            />
+          <View>
+            <View className="w-36 h-36 ms-auto bg-primary flex items-center justify-center -mt-[4.5rem] rounded-full relative">
+              <Image
+                source={images.profile}
+                className="w-32 h-32 rounded-full"
+                resizeMode="cover"
+              />
+            </View>
+            <TouchableOpacity
+              className="absolute py-3"
+              onPress={() => {
+                router.push("settings");
+              }}
+            >
+              <Feather name="edit" color={"white"} size={20} />
+            </TouchableOpacity>
           </View>
           <View className="flex-row-reverse items-center justify-between mt-4">
             <Text className="text-white text-2xl font-psemibold">
